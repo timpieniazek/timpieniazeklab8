@@ -27,8 +27,8 @@ public class Validator {
 	
 	public static String getYesOrNo(Scanner sc, String prompt) {
 		String s = "";
-		int toggle = -1;
-		while (toggle < 1) {
+		boolean isValid = false;
+		while (!isValid) {
 			System.out.print(prompt);
 			s = sc.next(); // read user entry
 			if (s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("y")) {
@@ -37,8 +37,7 @@ public class Validator {
 				return "no";
 			} else {
 				System.out.print("\nInput not recognized. ");
-				prompt = prompt.substring(29);
-				toggle++;
+				prompt = "(enter \"yes\" or \"no\"): ";
 			}
 			
 		}
@@ -55,7 +54,7 @@ public class Validator {
 				i = sc.nextInt();
 				isValid = true;
 			} else {
-				System.out.print("Error! Invalid integer value. Try again. ");
+				System.out.print("\nError! Invalid integer value. Try again. ");
 			}
 			sc.nextLine(); // discard any other data entered on the line
 		}

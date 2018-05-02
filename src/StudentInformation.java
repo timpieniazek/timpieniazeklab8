@@ -47,9 +47,9 @@ public class StudentInformation {
 			System.out.print("Which student would you like to learn more about? ");
 
 			// calls Validator.getInt to choose a student from NAMES[] with range of 1 - 20
-			int studentId = Validator.getInt(scan, PROMPT_ONE, 1, 20);
+			int studentId = Validator.getInt(scan, PROMPT_ONE, 1, 20) - 1;
 			System.out.printf("%nStudent %s is %s. What would you like to know about %s? ",
-					studentId, NAMES[studentId], NAMES[studentId].split(" ")[0]);
+					studentId + 1, NAMES[studentId], NAMES[studentId].split(" ")[0]);
 
 			// calls Validator.getString to prompt for information topic (hometown or favorite food)
 			String infoTopic = Validator.getString(scan, PROMPT_TWO, HOMETOWN, FAVORITE_FOOD);
@@ -61,6 +61,7 @@ public class StudentInformation {
 				// if user chooses to continue, print the other food statement
 				if (Validator.getYesOrNo(scan, PROMPT_THREE + PROMPT_FOUR).equalsIgnoreCase(YES)) {
 					System.out.printf(FOOD_STATEMENT, NAMES[studentId].split(" ")[0], FAVORITEFOODS[studentId]);
+					System.out.println();
 				}
 				
 
@@ -71,6 +72,7 @@ public class StudentInformation {
 				// if user chooses to continue, print the other home statement
 				if (Validator.getYesOrNo(scan, PROMPT_THREE + PROMPT_FOUR).equalsIgnoreCase(YES)) {
 					System.out.printf(HOME_STATEMENT, NAMES[studentId].split(" ")[0], HOMETOWNS[studentId]);
+					System.out.println();
 				}				
 
 			}
@@ -83,7 +85,7 @@ public class StudentInformation {
 		}
 		
 		// end of program
-		System.out.println("\nThanks! Goodbye :)");
+		System.out.println("Thanks! Goodbye :)");
 		
 	}
 	

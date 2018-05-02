@@ -28,58 +28,63 @@ public class StudentInformation {
 		final String PROMPT_ONE = "(enter a number 1-20): ";
 		final String PROMPT_TWO = "(enter \"hometown\" or \"favorite food\"): ";
 		final String PROMPT_THREE = "Would you like to know more? ";
-		final String PROMPT_THREE = "(enter \"yes\" or \"no\"): ";
+		final String PROMPT_FOUR = "(enter \"yes\" or \"no\"): ";
 		
-		final String HOME_STATEMENT = "\"%n%s is from %s.\", NAMES[studentId].split(\" \")[0], HOMETOWNS[studentId]";
-		final String FOOD_STATEMENT = "%n%s will tell you their favorite food is %s";
+		// final constants for multi-use statements and strings
+		final String HOME_STATEMENT = "%n%s is from %s. ";
+		final String FOOD_STATEMENT = "%n%s will tell you their favorite food is %s. ";
+		final String HOMETOWN = "hometown";
+		final String FAVORITE_FOOD = "favorite food";
+		final String YES = "yes";
 
 		System.out.print("Welcome to our Java class. ");
 
 		// outer while loop conditional for exiting out of program
-		String cont = "y";
+		String cont = YES;
 
-		while (cont.equalsIgnoreCase("y")) {
+		while (cont.equalsIgnoreCase(YES)) {
 
 			System.out.print("Which student would you like to learn more about? ");
 
 			// calls Validator.getInt to choose a student from NAMES[] with range of 1 - 20
 			int studentId = Validator.getInt(scan, PROMPT_ONE, 1, 20);
-			System.out.printf("%nStudent %s is %s. What would you like to know about %s?",
+			System.out.printf("%nStudent %s is %s. What would you like to know about %s? ",
 					studentId, NAMES[studentId], NAMES[studentId].split(" ")[0]);
 
 			// calls Validator.getString to prompt for information topic (hometown or favorite food)
-			String infoTopic = Validator.getString(scan, PROMPT_TWO);
+			String infoTopic = Validator.getString(scan, PROMPT_TWO, HOMETOWN, FAVORITE_FOOD);
 
-			if (infoTopic.equalsIgnoreCase("hometown")) {
-				// if "hometown" is chosen, prints the hometown statement
-				System.out.printf(HOME_STATEMENT);
+			if (infoTopic.equalsIgnoreCase(HOMETOWN)) {
+				// if "hometown" is chosen, prints the home statement
+				System.out.printf(HOME_STATEMENT, NAMES[studentId].split(" ")[0], HOMETOWNS[studentId]);
 				
-
-			} else if (infoTopic.equalsIgnoreCase("favorite food")) {
-
-				System.out.printf("%n%s will tell you their favorite food is %s", names[studentId].split(" ")[0],
-						favoriteFoods[studentId]);
+				// if user chooses to continue, print the other food statement
+				if (Validator.getYesOrNo(scan, PROMPT_THREE + PROMPT_FOUR).equalsIgnoreCase(YES)) {
+					System.out.printf(FOOD_STATEMENT, NAMES[studentId].split(" ")[0], FAVORITEFOODS[studentId]);
+				}
+				
 
 			} else {
-
+				// otherwise "favorite food" must be chosen, prints the food statement
+				System.out.printf(FOOD_STATEMENT, NAMES[studentId].split(" ")[0], FAVORITEFOODS[studentId]);
 				
+				// if user chooses to continue, print the other home statement
+				if (Validator.getYesOrNo(scan, PROMPT_THREE + PROMPT_FOUR).equalsIgnoreCase(YES)) {
+					System.out.printf(HOME_STATEMENT, NAMES[studentId].split(" ")[0], HOMETOWNS[studentId]);
+				}				
 
 			}
 			
-			System.out.print("Would you like to learn about another student?");
+			// ends the outer loop to asking user to start learning about another student
+			System.out.print("\nWould you like to learn about another student? ");
 			
-			cont = Validator.getString(scan, PROMPT_THREE);
-
+			cont = Validator.getYesOrNo(scan, PROMPT_FOUR);
+			System.out.println();
 		}
+		
+		// end of program
+		System.out.println("\nThanks! Goodbye :)");
+		
 	}
-
-	public static boolean isValidInfoTopic(String topic) {
-		if (topic.equalsIgnoreCase(topic))
-			;
-	}
-
-	public static String printHometown() {
-	}
-}
-
+	
 }

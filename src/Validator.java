@@ -14,15 +14,36 @@ public class Validator {
 		boolean isValid = false;
 		while (isValid == false) {
 			System.out.print(prompt);
-			s = sc.next(); // read user entry
+			s = sc.nextLine(); // read user entry
 			if (!s.equalsIgnoreCase(cond1) && !s.equalsIgnoreCase(cond2)) {
 				System.out.print("\nThat data does not exist. Please try again. ");
 			} else {
 				isValid = true;
 			}
-			sc.nextLine(); // discard any other data entered on the line
+//			sc.nextLine(); // discard any other data entered on the line
 		}
 		return s;
+	}
+	
+	public static String getYesOrNo(Scanner sc, String prompt) {
+		String s = "";
+		int toggle = -1;
+		while (toggle < 1) {
+			System.out.print(prompt);
+			s = sc.next(); // read user entry
+			if (s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("y")) {
+				return "yes";
+			} else if (s.equalsIgnoreCase("no") || s.equalsIgnoreCase("n")) {
+				return "no";
+			} else {
+				System.out.print("\nInput not recognized. ");
+				prompt = prompt.substring(29);
+				toggle++;
+			}
+			
+		}
+		return s;
+		
 	}
 
 	public static int getInt(Scanner sc, String prompt) {
@@ -34,7 +55,7 @@ public class Validator {
 				i = sc.nextInt();
 				isValid = true;
 			} else {
-				System.out.println("Error! Invalid integer value. Try again.");
+				System.out.print("Error! Invalid integer value. Try again. ");
 			}
 			sc.nextLine(); // discard any other data entered on the line
 		}
